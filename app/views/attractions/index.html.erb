@@ -1,0 +1,27 @@
+<h2>All Attractions</h2>
+
+<% if user_is_admin? %>
+	Yay, your special and get access to all of the admin shenanigans!
+	<%= link_to "New Attraction", new_attraction_path %>
+<% end %>
+
+<br><br>
+
+<table style="width:80%">
+	<tr>
+		<th>Name</th>
+		<th>Tickets Needed</th>
+		<th>Details</th>
+	</tr>
+	<% @attractions.each do |attraction| %>
+		<tr>
+			<td><%= attraction.name %></td>
+			<td><%= attraction.tickets %></td>
+			<% if user_is_admin? %>
+				<td><%= link_to "Show #{attraction.name}", attraction_path(attraction) %></td>
+			<% else %>
+				<td><%= link_to "Go on #{attraction.name}", attraction_path(attraction) %></td>
+			<% end %>
+		</tr>
+	<% end %>
+</table>
